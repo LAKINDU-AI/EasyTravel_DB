@@ -42,4 +42,32 @@ SELECT MIN(price_per_night) AS cheapest_package FROM accommodations;
 //6. Using AVG(): Calculating Average Booking Cost
 SELECT AVG(amount) AS average_booking_price FROM payments;
 
+//create rolsuper
+
+-- Grant full control to Admins
+GRANT ALL PRIVILEGES ON *.* TO AdminRole;
+
+-- Allow Travel Agents to read and insert data but restrict updates and deletes
+GRANT SELECT, INSERT ON *.* TO TravelAgentRole;
+
+-- Allow Customers to only view their data
+GRANT SELECT ON Customer, Booking TO CustomerRole;
+
+
+
+grantingpermission(ACL)
+
+-- Assign roles to users
+GRANT AdminRole TO 'admin_user'@'localhost';
+GRANT TravelAgentRole TO 'agent_user'@'localhost';
+GRANT CustomerRole TO 'customer_user'@'localhost';
+
+revoking permission
+
+-- Revoke specific permissions
+REVOKE INSERT ON *.* FROM TravelAgentRole;
+
+-- Remove a role from a user
+REVOKE AdminRole FROM 'admin_user'@'localhost';
+
 
